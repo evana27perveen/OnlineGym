@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GWTS | Assign Trainer</title>
+</head>
+<body>
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
+
+    * {
+        font-family: 'Nunito';
+        background-color: black;
+        color: white;
+    }
+
+    #tableLandlord {
+        font-size: 125%;
+        white-space: nowrap;
+        margin: 0;
+        border: none;
+        border-collapse: separate;
+        border-spacing: 0;
+        table-layout: fixed;
+    }
+
+    #tableLandlord td,
+    #tableLandlord th {
+        padding: 0.5rem 1rem;
+    }
+
+    #tableLandlord thead th {
+        padding: 3px;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        width: 25vw;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    #tableLandlord td {
+        padding: 4px 5px;
+        text-align: center;
+    }
+
+    #tableLandlord tbody tr:nth-child(odd) th,
+    #tableLandlord tbody tr:nth-child(odd) td {
+    }
+
+    .submit {
+        text-decoration: none;
+        color: white;
+        padding: 2px 5px;
+        background-color: #f52f05;
+        border: 1px solid #f52f05;
+        border-radius: 30%;
+    }
+
+    .home {
+        text-decoration: none;
+
+        font-weight: bold;
+        font-size: 18px;
+        background-color: #f52f05;
+        padding: 12px;
+        border-radius: 10% 30% 50% 70%;
+    }
+</style>
+
+<div class="container mx-auto py-5 text-center flex flex-col justify-center items-center">
+    <a href="{% url 'App_main:admin-dashboard' %}" class="home"> GWTS </a>
+    <h1 class="text-[1.2rem] sm:text-[1.4rem] pb-8" style="text-align: center; color: #f56040">
+        Assign a Trainer
+    </h1>
+    <hr style="background-color: #f56040; border: 2px solid #f56040">
+
+    <div class="w-full overflow-auto" tabindex="0" id="tableLandlord">
+        <table class="overflow-scroll">
+            <thead>
+            <tr>
+                <th style="border: 1px solid #f56040">Index</th>
+                <th style="border: 1px solid #f56040">Member</th>
+                <th style="border: 1px solid #f56040">Age</th>
+                <th style="border: 1px solid #f56040">Gender</th>
+                <th style="border: 1px solid #f56040">Joined</th>
+                <th style="border: 1px solid #f56040">Trainer</th>
+                <th style="border: 1px solid #f56040">Apply</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for member in members %}
+                <tr style="text-align: center;">
+                    <th style="border-bottom: 1px solid #f56040">{{ forloop.counter }}</th>
+                    <th style="border-bottom: 1px solid #f56040">{{ member.user.first_name }} {{ member.user.last_name }}</th>
+                    <td style="border-bottom: 1px solid #f56040">{{ member.age }}</td>
+                    <td style="border-bottom: 1px solid #f56040">{{ member.gender }}</td>
+                    <td style="border-bottom: 1px solid #f56040">{{ member.joining_date }}</td>
+                    <form method="post"
+                          action="{% url 'App_main:assign-trainer' pk=member.id %}">
+                        {% csrf_token %}
+                        <td style="border-bottom: 1px solid #f56040">
+                            <select name="trainer">
+                                {% for trainer in trainers %}
+                                    <option value="{{ trainer.id }}">{{ trainer.user.first_name }} {{ trainer.user.last_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td style="border-bottom: 1px solid #f56040"><button
+                                 type="submit"
+                                class="submit">Apply</button></td>
+                    </form>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

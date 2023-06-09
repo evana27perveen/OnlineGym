@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GWTS | Health Updates</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/barfiller.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+
+    <!-- Modernizer JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
+</head>
+
+<body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
+
+    .table-div {
+        font-family: 'Nunito';
+        background-color: #212529;
+        color: white;
+    }
+
+    body {
+        background-color: #212529;
+    }
+
+    .home {
+        text-decoration: none;
+
+        font-weight: bold;
+        font-size: 18px;
+        background-color: #f52f05 !important;
+        padding: 12px;
+        border-radius: 10% 30% 50% 70%;
+    }
+
+
+    .chart {
+        width: 80%;
+        height: 100% !important;
+        display: block;
+    }
+
+    .numbers {
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        width: 50px;
+        height: 100%;
+        display: inline-block;
+        float: left;
+    }
+
+    .numbers li {
+        list-style: none;
+        height: 150px;
+        position: relative;
+        bottom: 145px;
+    }
+
+    .numbers span {
+        font-size: 12px;
+        font-weight: 600;
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+    }
+
+    .bars {
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        background: #555;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        width: 500px;
+        height: 300px;
+        box-shadow: 0 0 10px 0 #555;
+        border-radius: 5px;
+    }
+
+    .bars li {
+        display: table-cell;
+        width: 100px;
+        height: 300px;
+        position: relative;
+    }
+
+    .bars span {
+        width: 100%;
+        position: absolute;
+        bottom: -30px;
+        text-align: center;
+    }
+
+    .bars .bar {
+        display: block;
+        background: #17C0EB;
+        width: 50px;
+        position: absolute;
+        bottom: 0;
+        margin-left: 25px;
+        text-align: center;
+        box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
+        transition: 0.5s;
+        transition-property: background, box-shadow;
+    }
+
+    .bars .bar:hover {
+        background: #55EFC4;
+        box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+        cursor: pointer;
+    }
+
+    .bars .bar:before {
+        color: #fff;
+        content: attr(value);
+        position: relative;
+        bottom: 20px;
+    }
+
+
+    #tableLandlord {
+        font-size: 100%;
+        white-space: nowrap;
+        margin: 0;
+        border: none;
+        border-collapse: separate;
+        border-spacing: 0;
+        table-layout: fixed;
+    }
+
+    #tableLandlord td,
+    #tableLandlord th {
+        padding: 0.5rem 1rem;
+    }
+
+    #tableLandlord thead th {
+        padding: 3px;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        width: 25vw;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    #tableLandlord td {
+        padding: 4px 5px;
+        text-align: center;
+    }
+
+    #tableLandlord tbody tr:nth-child(odd) th,
+    #tableLandlord tbody tr:nth-child(odd) td {
+    }
+
+    .submit {
+        text-decoration: none !important;
+        color: white !important;
+        background-color: transparent;
+        border: 1px solid #f52f05;
+        height: 100% !important;
+        width: 100%;
+        font-size: 18px;
+
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+
+</style>
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div style="background-color: #151515">
+    <a href="{% url 'App_main:admin-dashboard' %}" style="text-decoration: none; color: white" class="home"> GWTS </a>
+</div>
+<!-- Services Section Begin -->
+<section class="services-section spad"
+         style="margin-top: 0!important; padding-top: 40px!important; overflow: hidden">
+    <div class="container_a" style="margin-top: 0!important;">
+        <div class="row" style="margin-top: 0!important;">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>{{ member.user.first_name }} {{ member.user.last_name }}</h2>
+                    <p>-------------------</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 100%; width: 100%; justify-content: center">
+            <div class="chart">
+                <ul class="bars" style="height: 100%; width: 100%!important;">
+                    {% for bmi in bmi_data %}
+                        <li>
+                            {% if bmi.weight_status == 'Healthy' %}
+                                <div class="bar" data-percentage="80" value="{{ bmi.weight_status }}"></div>
+                            {% endif %}
+                            {% if bmi.weight_status == 'Underweight' %}
+                                <div class="bar" data-percentage="50" value="{{ bmi.weight_status }}"></div>
+                            {% endif %}
+                            {% if bmi.weight_status == 'Overweight' %}
+                                <div class="bar" data-percentage="100" value="{{ bmi.weight_status }}"></div>
+                            {% endif %}
+                            {% if bmi.weight_status == 'Obese' %}
+                                <div class="bar" data-percentage="110" value="{{ bmi.weight_status }}"></div>
+                            {% endif %}
+                            <br>
+                            <span style="padding-top: 40px">{{ bmi.created.date }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--chart end-->
+
+            <script type="text/javascript">
+                $(function () {
+                    $('.bars li .bar').each(function (key, bar) {
+                        var percentage = $(this).data('percentage');
+                        $(this).animate({
+                            'height': percentage + '%'
+                        }, 1000);
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            {% if plan != '$' %}
+
+                <div class="container">
+                    <div class="row" style="">
+                        <div class="col-lg-12">
+                            <div class="section-title">
+                                <p>-------------------</p>
+                                <h2>Workout Plan</h2>
+                                <p>-------------------</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="background-color: white!important;">
+                    <h5 style="text-align: center; color: white">Date: {{ plan.created }}</h5>
+                    <hr style="background-color: white!important;">
+                    <h6 style="text-align: center; color: white">Duration: {{ plan.duration }} Minutes Per Day</h6>
+                    <hr style="background-color: white!important;">
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Sunday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #f16042;">| </span>
+                                    {% for workout in plan.sunday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Monday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #F16042FF;">| </span>
+                                    {% for workout in plan.monday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Tuesday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #F16042FF;">| </span>
+                                    {% for workout in plan.tuesday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Wednesday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #F16042FF;">| </span>
+                                    {% for workout in plan.wednesday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Thursday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #F16042FF;">| </span>
+                                    {% for workout in plan.thursday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Friday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #F16042FF;">| </span>
+                                    {% for workout in plan.friday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                    <ol>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h5 style="color: white!important;">Saturday: </h5>
+                            </div>
+                            <div class="col-lg-9">
+                                <p><span style="color: #F16042FF;">| </span>
+                                    {% for workout in plan.saturday.all %}
+                                        {{ workout }} <span style="color: #F16042FF;"> | </span>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </ol>
+                    <hr style="background-color: white!important;">
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <hr style="background-color: white!important;">
+    <div class="row" style="">
+        <div class="col-lg-12">
+            <div class="section-title">
+                <p>=========================================</p>
+                <h2>Diet Plan</h2>
+                <p>=========================================</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            {% if chart != '$' %}
+                <h5 style="text-align: center; color: #f56040">Date of Issue: {{ chart.issued }}</h5>
+                <hr>
+                <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th><b>Days</b></th>
+                        <th>Breakfast</th>
+                        <th>Lunch</th>
+                        <th>Dinner</th>
+                        <th>Snacks</th>
+                    </tr>
+                    </thead>
+                    <tbody style="color: white!important; overflow-x: hidden!important;">
+                    <tr>
+                        <td style="color: #f56040">Sunday:</td>
+                        <td>{{ chart.sunday_breakfast }}</td>
+                        <td>{{ chart.sunday_lunch }}</td>
+                        <td>{{ chart.sunday_dinner }}</td>
+                        <td>{{ chart.sunday_snacks }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f56040">Monday:</td>
+                        <td>{{ chart.monday_breakfast }}</td>
+                        <td>{{ chart.monday_lunch }}</td>
+                        <td>{{ chart.monday_dinner }}</td>
+                        <td>{{ chart.monday_snacks }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f56040">Tuesday:</td>
+                        <td>{{ chart.tuesday_breakfast }}</td>
+                        <td>{{ chart.tuesday_lunch }}</td>
+                        <td>{{ chart.tuesday_dinner }}</td>
+                        <td>{{ chart.tuesday_snacks }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f56040">Wednesday:</td>
+                        <td>{{ chart.wednesday_breakfast }}</td>
+                        <td>{{ chart.wednesday_lunch }}</td>
+                        <td>{{ chart.wednesday_dinner }}</td>
+                        <td>{{ chart.wednesday_snacks }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f56040">Thursday:</td>
+                        <td>{{ chart.thursday_breakfast }}</td>
+                        <td>{{ chart.thursday_lunch }}</td>
+                        <td>{{ chart.thursday_dinner }}</td>
+                        <td>{{ chart.thursday_snacks }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f56040">Friday:</td>
+                        <td>{{ chart.friday_breakfast }}</td>
+                        <td>{{ chart.friday_lunch }}</td>
+                        <td>{{ chart.friday_dinner }}</td>
+                        <td>{{ chart.friday_snacks }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f56040">Saturday:</td>
+                        <td>{{ chart.saturday_breakfast }}</td>
+                        <td>{{ chart.saturday_lunch }}</td>
+                        <td>{{ chart.saturday_dinner }}</td>
+                        <td>{{ chart.saturday_snacks }}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            {% endif %}
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+    <hr>
+</section>
+
+<!-- Js Plugins -->
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script src="{% static 'js/jquery.barfiller.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+
+</body>
+
+</html>

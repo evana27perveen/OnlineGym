@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GWTS | Signup</title>
+</head>
+
+<body>
+
+<style>
+    header {
+        margin-top: 45px;
+    }
+
+    h1 {
+        font-size: 55px;
+    }
+
+    p {
+        font-size: 17px;
+    }
+
+    body {
+        height: 100vh !important;
+        overflow-y: hidden;
+        background: url("{% static 'img/hero/hero-2.jpg' %}") !important;
+    }
+
+    h1, p, label, legend {
+        text-align: center;
+        color: #e8efed;
+        font-family: sans-serif;
+    }
+    form {
+        background-color: black;
+        opacity: 0.8!important;
+        color: white;
+        padding-top: 15px!important;
+        padding-bottom: 15px!important;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    fieldset {
+        border: 1px solid #e8efed
+    }
+
+    fieldset:hover {
+        box-shadow: 5px 5px 40px 5px #e8efed
+    }
+
+    .submit-button {
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;
+        color: white;
+        background-color: transparent;
+        border-radius: 10px;
+        border: 2px solid white;
+        height: 40px;
+        width: 50%;
+    }
+
+    .submit-button:hover {
+        box-shadow: 5px 5px 40px 5px #e8efed;
+        letter-spacing: 1px!important;
+    }
+
+    .btn-div {
+        text-align: center;
+    }
+    .log {
+        color: #f50c0c;
+        font-size: 16px;
+        text-decoration: none;
+        margin-left: 5px;
+    }
+    .log:hover {
+        color: #f50c0c;
+        font-weight: bold;
+        letter-spacing: 1px!important;
+    }
+
+    @media only screen and (max-width: 768px) {
+        body {
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+</style>
+
+<header>
+    <h1>Sign up</h1>
+    <p>Please, fill in the following information.</p>
+</header>
+<br></br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset style="text-align: center">
+        <legend>User Information:</legend>
+        <label for="first_name" style="margin-right: 3%; margin-left: 2%">First Name: {{ form1.first_name }}</label>
+        <label for="last_name" style="margin-right: 3%">Last Name: {{ form1.last_name }}</label>
+        <label for="username" style="margin-right: 3%">User Name: {{ form1.username }}</label>
+        <label for="email" style="margin-right: 3%">Email Address: {{ form1.email }}</label>
+    </fieldset>
+    <br></br>
+    <fieldset style="text-align: center">
+        <legend>Create a password:</legend>
+        <label for="password1" style="margin-right: 3%">New password: {{ form1.password1 }}</label>
+        <label for="password2" style="margin-left: 3%">Confirm password: {{ form1.password2 }}</label>
+    </fieldset>
+    <br></br>
+    <fieldset style="text-align: center">
+        <legend>Basic Information:</legend>
+        <label for="address" style="margin-right: 1%;">Address: {{ form2.address }}
+        </label>
+        <label for="phone" style="margin-right: 1%">Phone: {{ form2.phone_number }}
+        </label>
+        <label for="gender" style="margin-right: 1%">Gender: {{ form2.gender }}
+        </label>
+        <label for="age" style="margin-right: 1%;">Age: {{ form2.age }}
+        </label>
+        <label for="profile_pic" style="margin-left: 1%">Profile Picture: {{ form2.profile_picture }}
+        </label>
+    </fieldset>
+    <br>
+    <br>
+    <div class="btn-div">
+        <button type="submit" class="submit-button">Sign up</button>
+        <br>
+        <p style="font-size: 12px;">Already a Member???<a href="{% url 'App_auth:login' %}" class="log"> Login Here >></a></p>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+{% load crispy_forms_filters %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GWTS | Inbox</title>
+</head>
+<body style="overflow-x: hidden">
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
+
+    * {
+        font-family: 'Nunito';
+        background-color: black;
+        color: white;
+    }
+
+
+    .submit {
+        text-decoration: none;
+        color: white;
+        background-color: #f52f05;
+        border: 1px solid #f52f05;
+        height: 100%;
+        width: 100%;
+        font-size: 18px;
+
+    }
+
+    .add {
+        text-decoration: none;
+        color: white;
+        background-color: #f52f05;
+        border: 1px solid #f52f05;
+        height: 100%;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .add:hover {
+        background-color: #f52f05;
+    }
+
+    .submit:hover {
+        font-size: 14px;
+        margin-bottom: 3%;
+    }
+
+    .home {
+        text-decoration: none;
+
+        font-weight: bold;
+        font-size: 18px;
+        background-color: #f52f05;
+        padding: 12px;
+        border-radius: 10% 30% 50% 70%;
+    }
+
+    hr {
+        color: #f52f05;
+    }
+
+    .select-options-horizontal select {
+        display: flex;
+    }
+
+    .select-options-horizontal option {
+        flex: 1;
+    }
+
+    #id_duration {
+        width: 100%;
+        border: 3px solid white;
+        margin-bottom: 15px;
+        color: white;
+    }
+
+    input {
+        border: 2px solid white;
+        margin-bottom: 5px;
+        width: 100% !important;
+    }
+
+    img {
+        height: 400px;
+        width: 300px;
+        justify-content: center !important;
+        margin: 5px;
+    }
+
+    h5, h6 {
+        margin-left: 10px !important;
+    }
+
+    .box {
+        width: 100%;
+        margin: 50px auto;
+        background: #f52f05;
+        padding: 20px;
+        text-align: center;
+        font-weight: 900;
+        color: #fff;
+        font-family: arial;
+        position: relative;
+        border-radius: 6px
+    }
+
+    .sent:before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 10px solid #f52f05;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #f52f05;
+        border-bottom: 10px solid transparent;
+        right: -20px;
+        top: 10px;
+    }
+
+    .received:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 10px solid transparent;
+        border-right: 10px solid #f52f05;
+        border-top: 10px solid #f52f05;
+        border-bottom: 10px solid transparent;
+        left: -19px;
+        top: 10px;
+    }
+
+</style>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+
+    .chat-box {
+        width: 500px;
+        height: 90%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        background-color: #1A1C26;
+        background-color: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .chat-box {
+            width: 80%;
+        }
+    }
+
+    @media only screen and (max-width: 800px) and (max-width: 400px) {
+        .chat-box {
+            width: 90%;
+        }
+    }
+
+    .box-top_bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 30px;
+        padding-block: 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .box-top_bar b {
+        font-family: "Poppins", sans-serif;
+        letter-spacing: 1px;
+        font-size: 14px;
+        color: #FFFFFF;
+        opacity: 0.6;
+    }
+
+    .box-top_bar .user_image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .box-top_bar .user_image img {
+        border-radius: inherit;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .box-top_bar {
+            padding-inline: 20px;
+            padding-block: 20px;
+        }
+
+        .box-top_bar .user_image {
+            width: 45px;
+            height: 45px;
+        }
+    }
+
+    .chat-box_content {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+
+    .chat-box_content .chat-messages {
+        position: relative;
+        padding-inline: 30px;
+        padding-block: 30px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .chat-box_content .chat-messages {
+            padding-inline: 20px;
+        }
+    }
+
+    .chat-box_content .chat-messages .message-box {
+        position: relative;
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        will-change: contents;
+        transition: all 0.3s ease;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .chat-box_content .chat-messages .message-box {
+            gap: 10px;
+        }
+    }
+
+    .chat-box_content .chat-messages .message-box img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .chat-box_content .chat-messages .message-box .message_content {
+        padding-inline: 16px;
+        padding-block: 8px;
+        background: linear-gradient(45deg, #707DF7, #EF7196);
+        border-radius: 50px 50px 50px 8px;
+        z-index: 1;
+    }
+
+    .chat-box_content .chat-messages .message-box .message_content p {
+        font-family: "Poppins", sans-serif;
+        font-size: 15px;
+        color: #FFFFFF;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .chat-box_content .chat-messages .message-box .message_content p {
+            font-size: 13px;
+        }
+    }
+
+    .chat-box_content .chat-messages .message-box .message-options {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translate(55px, 0);
+        width: 26px;
+        height: 0;
+        padding-inline: 10px;
+        padding-block: 4px;
+        background-color: #262835;
+        border-radius: 10px;
+        overflow: hidden;
+        opacity: 0;
+        transform-origin: top;
+        will-change: contents;
+        transition: all 0.3s ease, opacity 0.3s ease-out;
+    }
+
+    .chat-box_content .chat-messages .message-box .message-options menu {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .chat-box_content .chat-messages .message-box .message-options menu li {
+        opacity: 0;
+        will-change: contents;
+        transition: all 0.2s ease-out;
+    }
+
+    .chat-box_content .chat-messages .message-box .message-options menu li button {
+        width: 30px;
+        height: 30px;
+        line-height: 0;
+        font-size: 16px;
+        background-color: transparent;
+        border-radius: 6px;
+        border: 0;
+        cursor: pointer;
+        will-change: contents;
+        transition: all 0.3s ease;
+    }
+
+    .chat-box_content .chat-messages .message-box .message-options menu li button:hover {
+        transform: scale(1.1);
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked {
+        border-radius: 6px;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked .message-options {
+        width: 26px;
+        height: 26px;
+        padding-inline: 0;
+        padding-block: 0;
+        transform: translate(60px, 18px);
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked .message-options menu li {
+        display: none;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked .message-options menu li.is-active {
+        display: block;
+        opacity: 1;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked .message-options menu li button {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked.is-active .message-options {
+        width: calc((30px * 3) + 16px);
+        transition: all 0.4s ease, width 0s;
+        padding-inline: 10px;
+        padding-block: 4px;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked.is-active .message-options menu li {
+        display: block;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-liked.is-active .message-options menu li button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-active {
+        transform: scale(1.0999999) translateX(20px);
+        filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+    }
+
+    .chat-box_content .chat-messages .message-box.is-active .message-options {
+        width: calc((30px * 3) + 16px);
+        height: 41.8px;
+        transform: translate(55px, 56px);
+        opacity: 1;
+    }
+
+    .chat-box_content .chat-messages .message-box.is-active .message-options menu li {
+        opacity: 1;
+    }
+
+    .chat-box_content .chat-form {
+        display: flex;
+        align-items: center;
+        padding-inline: 20px;
+        padding-block: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chat-box_content .chat-form button {
+        width: 80px;
+        height: 40px;
+        line-height: 0;
+        background-color: #707DF7;
+        border-radius: 6px;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .chat-box_content .chat-form button ion-icon {
+        font-size: 22px;
+        color: #FFFFFF;
+    }
+
+    .chat-box_content .chat-form input {
+        width: 100%;
+        height: 100%;
+        padding-inline: 10px;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        color: #FFFFFF;
+        background-color: transparent;
+        border: 0;
+    }
+
+    .chat-box_content .chat-form input::placeholder {
+        color: #FFFFFF;
+        opacity: 0.3;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .chat-box_content .chat-form input {
+            font-size: 12px;
+        }
+    }
+
+    .message-box.is-active .message-options {
+        animation: bg 0.6s ease;
+    }
+
+    @keyframes bg {
+        0% {
+            transform: translate(55px, 0px) scale(0.8);
+            z-index: -1;
+        }
+        50% {
+            transform: translate(55px, 56px) scale(1.07);
+        }
+        100% {
+            transform: translate(55px, 56px) scale(1);
+            z-index: 1;
+        }
+    }
+</style>
+
+<div class="">
+    <a href="{% url 'App_main:trainer-dashboard' %}" style="text-decoration: none; color: white" class="home"> GWTS </a>
+    <h1 class="text-[1.2rem] sm:text-[1.4rem] pb-8" style="text-align: center; color: #eca798;">
+        To: {{ trainer.user.first_name }} {{ trainer.user.last_name }}
+    </h1>
+    <hr style="background-color: #f56040; border: 2px solid #f56040">
+    <div class="row" style="width: 100%;">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10" id="form-div">
+            <div class="row container">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+
+                    <div class="chat">
+                        {% for message in messages %}
+                            {% if message.sender == request.user %}
+                                <div class="box sent">{{ message.message }} <br>
+                                    <sub style="background-color: transparent; font-weight: lighter;">{{ message.created }}</sub>
+                                </div>
+                            {% else %}
+                                <div class="box received">{{ message.message }} <br>
+                                    <sub
+                                        style="background-color: transparent; font-weight: lighter;">{{ message.created }}
+                                    </sub>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="chat-form"
+                             style=" justify-content: center!important;">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <input name="msg" style="border: 1px solid white; height: 100%; width: 100%"
+                                               type="text"
+                                               placeholder="Type somenthing...">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button type="submit"
+                                                style="border: 1px solid white; height: 100%; width: 100%; background-color: #f52f05; justify-content: center;">
+                                            <ion-icon name="paper-plane-outline"
+                                                      style="background-color: #f52f05; font-size: 20px;margin-top: 5px"></ion-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+    <hr style="background-color: #f56040; border: 2px solid #f56040">
+    <hr>
+</div>
+
+<script>
+window.onload = function() {
+  window.scrollTo(0, document.body.scrollHeight);
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
